@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:moneygement_app/infrastructure/architecutre/blocs/session/session_event.dart';
 import 'package:moneygement_app/modules/authentication/presentation/screens/register_user/bloc/register_user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneygement_app/infrastructure/architecutre/blocs/messenger/messenger_cubit.dart';
-import 'package:moneygement_app/infrastructure/architecutre/blocs/session/session_bloc.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:moneygement_app/infrastructure/ext/double_ext.dart';
 import 'package:moneygement_app/infrastructure/routing/router.gr.dart';

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:moneygement_app/infrastructure/types/nothing.dart';
 import 'package:moneygement_app/infrastructure/types/resource.dart';
-import 'package:moneygement_app/modules/authentication/domain/model/user_session_model.dart';
 import 'package:moneygement_app/modules/authentication/domain/usecases/register_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

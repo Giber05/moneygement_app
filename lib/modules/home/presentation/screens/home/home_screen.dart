@@ -1,18 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:moneygement_app/infrastructure/ext/double_ext.dart';
-import 'package:moneygement_app/infrastructure/gen/assets.gen.dart';
-import 'package:moneygement_app/infrastructure/routing/router.gr.dart';
-import 'package:moneygement_app/infrastructure/widgets/buttons/outlined_button.dart';
-import 'package:moneygement_app/infrastructure/widgets/layouts/dialog/dialog_container.dart';
-import 'package:moneygement_app/infrastructure/widgets/loading/circular.dart';
+
 import 'package:flutter/material.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
-import 'package:moneygement_app/infrastructure/widgets/buttons/elevated_button.dart';
 import 'package:moneygement_app/modules/authentication/presentation/widgets/logged_in_wrapper.dart';
 import 'package:moneygement_app/modules/overview/presentation/overview_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:sizer/sizer.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {

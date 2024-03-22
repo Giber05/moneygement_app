@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:moneygement_app/infrastructure/widgets/buttons/base_button.dart';
 import 'package:moneygement_app/infrastructure/widgets/buttons/button_icon_type.dart';
 
@@ -14,11 +15,13 @@ class CBElevatedButton extends StatelessWidget {
   final bool keepBalance;
   final TextStyle? textStyle;
   final EdgeInsets padding;
+  final double elevation;
   const CBElevatedButton({
     super.key,
     required this.label,
     this.onPressed,
     this.fillParent = false,
+    this.elevation = 2,
     this.prefixIcon,
     this.suffixIcon,
     this.backgroundColor,
@@ -35,8 +38,9 @@ class CBElevatedButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: style.copyWith(
-            foregroundColor: MaterialStatePropertyAll(foregroundColor),
-            backgroundColor: MaterialStatePropertyAll(backgroundColor),
+            elevation: MaterialStateProperty.all(elevation),
+            foregroundColor: MaterialStatePropertyAll(foregroundColor ?? context.color.onPrimary),
+            backgroundColor: MaterialStatePropertyAll(backgroundColor ?? context.color.onSurface),
             textStyle: const MaterialStatePropertyAll(TextStyle(fontSize: 18)),
             padding: MaterialStateProperty.all(padding),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(200)))),

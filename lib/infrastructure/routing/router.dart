@@ -10,6 +10,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: RegisterUserRoute.page, path: '/register'),
         AutoRoute(page: SplashRoute.page, path: '/splash', initial: true),
         AutoRoute(page: HomeRoute.page, path: '/home'),
-        AutoRoute(page: QuizRoute.page, path: '/quiz')
+        AutoRoute(page: QuizRoute.page, path: '/quiz'),
+        AutoRoute(page: CreateIncomeRoute.page, path: '/create-income'),
       ];
 }

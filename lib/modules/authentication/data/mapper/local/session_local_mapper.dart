@@ -1,6 +1,5 @@
 import 'package:moneygement_app/infrastructure/architecutre/local_mapper.dart';
 import 'package:moneygement_app/modules/authentication/data/mapper/local/user_local_mapper.dart';
-import 'package:moneygement_app/modules/authentication/domain/model/user_model.dart';
 import 'package:moneygement_app/modules/authentication/domain/model/user_session_model.dart';
 
 class SessionLocalMapper extends LocalMapper<UserSessionModel, dynamic> {

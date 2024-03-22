@@ -2,8 +2,6 @@ import 'package:moneygement_app/infrastructure/types/exceptions/base_exception.d
 import 'package:moneygement_app/infrastructure/types/nothing.dart';
 import 'package:injectable/injectable.dart';
 import 'package:moneygement_app/infrastructure/http_client/api_client.dart';
-import 'package:moneygement_app/modules/authentication/data/mapper/remote/request/auth_request_mapper.dart';
-import 'package:moneygement_app/modules/authentication/data/mapper/remote/response/user_session_remote_mapper.dart';
 import 'package:moneygement_app/modules/authentication/domain/model/user_model.dart';
 import 'package:moneygement_app/modules/authentication/domain/model/user_session_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -31,10 +29,9 @@ class AuthenticationRemoteDTSImpl implements AuthenticationRemoteDTS {
       if (response.user != null) {
         final user = response.user;
         final session = response.session;
-        print("Session User ==>${session?.toJson()}");
         return APIResult(
             data: UserSessionModel(
-                token: response.session!.accessToken,
+                token: session!.accessToken,
                 user: UserModel(userId: user!.id, email: email, displayName: user.userMetadata?["name"])),
             message: "Login berhasil",
             status: "OK",
