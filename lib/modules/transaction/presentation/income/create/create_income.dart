@@ -7,6 +7,7 @@ import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:moneygement_app/infrastructure/ext/double_ext.dart';
 import 'package:moneygement_app/infrastructure/ext/shadow_ext.dart';
 import 'package:moneygement_app/infrastructure/widgets/buttons/elevated_button.dart';
+import 'package:moneygement_app/infrastructure/widgets/form/date_time/date_picker.dart';
 import 'package:moneygement_app/infrastructure/widgets/form/dropdown.dart';
 import 'package:moneygement_app/infrastructure/widgets/form/text_field.dart';
 import 'package:sizer/sizer.dart';
@@ -90,19 +91,12 @@ class CreateIncomeScreen extends StatelessWidget {
                       label: "Kategori",
                     ),
                     16.verticalSpace,
-                    CBTextField(
-                      label: 'Tanggal',
-                      readOnly: true,
-                      onTap: () {
-                        showDatePicker(
-                          context: context,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                        );
-                      },
+                    MGDatePicker(
+                      onFieldSubmitted: (DateTime? newValue) {},
+                      borderRadius: null,
                     ),
                     16.verticalSpace,
-                    CBTextField(
+                    MGTextField(
                       label: 'Catatan',
                     )
                   ],

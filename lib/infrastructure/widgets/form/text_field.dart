@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:sizer/sizer.dart';
 
-class CBTextField extends StatelessWidget {
+class MGTextField extends StatelessWidget {
   final String label;
   final String? hintText;
   final String? desc;
@@ -30,7 +30,7 @@ class CBTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Function()? onTap;
 
-  CBTextField({
+  MGTextField({
     Key? key,
     this.controller,
     this.hintText,

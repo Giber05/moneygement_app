@@ -22,17 +22,17 @@ class _RegisterUserForm extends StatelessWidget {
                 style: context.text.titleLarge?.copyWith(color: context.color.primary, fontSize: 24),
               ),
               34.verticalSpace,
-              CBTextField(
+              MGTextField(
                 controller: bloc.name,
                 label: "Name",
               ),
               23.verticalSpace,
-              CBTextField(
+              MGTextField(
                 controller: bloc.email,
                 label: "Email",
               ),
               23.verticalSpace,
-              CBTextField(
+              MGTextField(
                 controller: bloc.password,
                 label: "Password",
               ),
@@ -41,7 +41,8 @@ class _RegisterUserForm extends StatelessWidget {
                 label: "Register",
                 fillParent: true,
                 onPressed: () {
-                  context.read<RegisterUserBloc>().add(RegisterUserRequested(email: bloc.email.text, password: bloc.password.text, name: bloc.name.text));
+                  context.read<RegisterUserBloc>().add(RegisterUserRequested(
+                      email: bloc.email.text, password: bloc.password.text, name: bloc.name.text));
                 },
               )
             ],

@@ -17,7 +17,7 @@ class _CBPasswordFieldState extends State<CBPasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return CBTextField(
+    return MGTextField(
       obscureText: _isPasswordHidden,
       suffixIcon: InkWell(
         onTap: () => setState(() {
