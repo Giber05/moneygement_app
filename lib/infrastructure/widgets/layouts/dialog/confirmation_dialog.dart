@@ -69,7 +69,7 @@ class ConfirmationDialog extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: CBElevatedButton(
+                      child: MGElevatedButton(
                         onPressed: () => onConfirm(() {
                           Navigator.of(context).pop();
                         }),

@@ -3,7 +3,7 @@ import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:moneygement_app/infrastructure/widgets/buttons/base_button.dart';
 import 'package:moneygement_app/infrastructure/widgets/buttons/button_icon_type.dart';
 
-class CBElevatedButton extends StatelessWidget {
+class MGElevatedButton extends StatelessWidget {
   final String label;
   final bool fillParent;
   final VoidCallback? onPressed;
@@ -16,7 +16,7 @@ class CBElevatedButton extends StatelessWidget {
   final TextStyle? textStyle;
   final EdgeInsets padding;
   final double elevation;
-  const CBElevatedButton({
+  const MGElevatedButton({
     super.key,
     required this.label,
     this.onPressed,

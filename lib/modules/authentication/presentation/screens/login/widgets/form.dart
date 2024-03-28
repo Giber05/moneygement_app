@@ -32,7 +32,7 @@ class _LoginForm extends StatelessWidget {
                 label: "Password",
               ),
               33.verticalSpace,
-              CBElevatedButton(
+              MGElevatedButton(
                 label: "Sign In",
                 fillParent: true,
                 onPressed: () {
@@ -40,7 +40,7 @@ class _LoginForm extends StatelessWidget {
                 },
               ),
               24.verticalSpace,
-              CBElevatedButton(
+              MGElevatedButton(
                 label: "Sign Up",
                 fillParent: true,
                 onPressed: () {

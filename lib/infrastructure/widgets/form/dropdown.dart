@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
 import 'package:sizer/sizer.dart';
 
-class CBDropdown<T> extends StatefulWidget {
+class AddNewItemUtil {
+  final String title;
+  final VoidCallback onTap;
+
+  AddNewItemUtil({required this.title, required this.onTap});
+}
+
+class MGDropdown<T> extends StatefulWidget {
   final List<(String label, T data)> choices;
   final T? initialValue;
-  final UFDropdownController? controller;
+  final MGDropdownController? controller;
   final String label;
   final String? hintText;
   final String? desc;
@@ -26,8 +33,8 @@ class CBDropdown<T> extends StatefulWidget {
   final FocusNode? focusNode;
   final bool? autofocus;
   final BorderRadius borderRadius;
-
-  CBDropdown({
+  final AddNewItemUtil? hasAddNewItemUtil;
+  MGDropdown({
     super.key,
     required this.choices,
     this.controller,
@@ -51,17 +58,18 @@ class CBDropdown<T> extends StatefulWidget {
     this.textInputAction,
     this.contentPadding,
     this.initialValue,
+    this.hasAddNewItemUtil,
   }) : borderRadius = BorderRadius.circular(8);
 
   @override
-  State<CBDropdown<T>> createState() => _CBDropdownState<T>();
+  State<MGDropdown<T>> createState() => _MGDropdownState<T>();
 }
 
-class UFDropdownController<T> {
-  _CBDropdownState<T>? _state;
-  UFDropdownController();
+class MGDropdownController<T> {
+  _MGDropdownState<T>? _state;
+  MGDropdownController();
 
-  _init(_CBDropdownState<T>? state) {
+  _init(_MGDropdownState<T>? state) {
     _state = state;
   }
 
@@ -72,14 +80,42 @@ class UFDropdownController<T> {
   T? get value => _state?._value;
 }
 
-class _CBDropdownState<T> extends State<CBDropdown<T>> {
+class _MGDropdownState<T> extends State<MGDropdown<T>> {
   T? _value;
-
+  List<DropdownMenuItem<T>> optionItems = [];
   @override
   void initState() {
     super.initState();
     widget.controller?._init(this);
     _value = widget.initialValue;
+    final hasAddNewItemUtil = widget.hasAddNewItemUtil;
+    if (hasAddNewItemUtil != null) {
+      optionItems.add(
+        DropdownMenuItem(
+          value: _value,
+          onTap: () {
+            print('ontap');
+            hasAddNewItemUtil.onTap.call();
+          },
+          enabled: true,
+          child: Text(
+            hasAddNewItemUtil.title,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      );
+    }
+    widget.choices.map(
+      (choice) => optionItems.add(
+        DropdownMenuItem(
+          value: choice.$2,
+          child: Text(
+            choice.$1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -87,15 +123,7 @@ class _CBDropdownState<T> extends State<CBDropdown<T>> {
     final color = context.color;
     final text = context.text;
     return DropdownButtonFormField<T>(
-        items: widget.choices
-            .map((e) => DropdownMenuItem(
-                  value: e.$2,
-                  child: Text(
-                    e.$1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ))
-            .toList(),
+        items: optionItems,
         isExpanded: true,
         value: _value,
         validator: widget.validator,
@@ -103,26 +131,20 @@ class _CBDropdownState<T> extends State<CBDropdown<T>> {
           prefixIcon: widget.prefixIcon,
           labelText: widget.label,
           suffixIconColor: context.color.outline,
-          errorStyle: context.text.bodySmall
-              ?.copyWith(color: color.error, fontSize: 10.sp),
+          errorStyle: context.text.bodySmall?.copyWith(color: color.error, fontSize: 10.sp),
           labelStyle: text.bodySmall,
           alignLabelWithHint: false,
           errorMaxLines: 3,
-          errorBorder: OutlineInputBorder(
-              borderRadius: widget.borderRadius,
-              borderSide: BorderSide(color: color.error)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: widget.borderRadius,
-              borderSide: BorderSide(color: color.error)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: widget.borderRadius,
-              borderSide: BorderSide(color: color.primary)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: widget.borderRadius,
-              borderSide: BorderSide(color: color.outline)),
+          errorBorder:
+              OutlineInputBorder(borderRadius: widget.borderRadius, borderSide: BorderSide(color: color.error)),
+          focusedErrorBorder:
+              OutlineInputBorder(borderRadius: widget.borderRadius, borderSide: BorderSide(color: color.error)),
+          focusedBorder:
+              OutlineInputBorder(borderRadius: widget.borderRadius, borderSide: BorderSide(color: color.primary)),
+          enabledBorder:
+              OutlineInputBorder(borderRadius: widget.borderRadius, borderSide: BorderSide(color: color.outline)),
           hintText: widget.hintText,
-          contentPadding: widget.contentPadding ??
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+          contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
         ),
         onChanged: (value) {
           setState(() {

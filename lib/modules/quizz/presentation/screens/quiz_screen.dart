@@ -105,7 +105,7 @@ class _QuizContent extends StatelessWidget {
             children: [
               Center(child: Text(state.message)),
               16.verticalSpace,
-              CBElevatedButton(
+              MGElevatedButton(
                 label: 'Refresh',
                 onPressed: () {
                   context.read<QuizBloc>().add(GetQuizEvent());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:moneygement_app/infrastructure/architecutre/blocs/messenger/messenger_cubit.dart';
 import 'package:moneygement_app/infrastructure/architecutre/blocs/session/session_bloc.dart';
@@ -27,8 +28,17 @@ class MoneyGementApp extends StatelessWidget {
       ],
       child: Sizer(builder: (context, _, __) {
         return MaterialApp.router(
+           localizationsDelegates:const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+         Locale('id', 'ID'), // Indonesia
+      ],
           debugShowCheckedModeBanner: false,
           routerDelegate: appRouter.delegate(),
+          locale: const Locale('id', 'ID'),
           builder: (context, child) {
             return GlobalErrorCatcher(
               child: CBMessengerListener(

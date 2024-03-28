@@ -44,7 +44,7 @@ class _QuestionItem extends StatelessWidget {
               );
             } else if (item.startsWith('http') && ((item as String).contains('.mp3'))) {
               return Center(
-                child: CBElevatedButton(
+                child: MGElevatedButton(
                   label: 'Play Audio',
                   suffixIcon: const Icon(Icons.play_circle),
                   onPressed: () async {
@@ -91,7 +91,7 @@ class _QuestionItem extends StatelessWidget {
                   );
                 })),
           if (question.typeQuestion == 'description')
-            CBElevatedButton(
+            MGElevatedButton(
               label: 'Next',
               onPressed: onNext,
             )

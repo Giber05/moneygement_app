@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../date_picker.dart';
 
 class DatePickerParams {
   final DateTime initialDate;
@@ -38,8 +38,9 @@ class DatePickerParams {
   });
 }
 
-Future<DateTime?> pickDate(BuildContext context,DatePickerParams params) {
-  return showDatePicker(
+Future<DateTime?> pickDate(BuildContext context, DatePickerParams params) async {
+  print('Call picked date');
+  return await showDatePicker(
     currentDate: params.currentDate,
     context: context,
     initialDate: params.initialDate,
@@ -51,8 +52,12 @@ Future<DateTime?> pickDate(BuildContext context,DatePickerParams params) {
     fieldLabelText: 'Tanggal',
     fieldHintText: 'Pilih Tanggal',
     helpText: '',
+    locale: const Locale('id', 'ID'),
     builder: (context, child) => Theme(
+      
       data: ThemeData(
+        
+        useMaterial3: true,
         textTheme: TextTheme(
           titleMedium: params.headerTextStyle,
           titleSmall: const TextStyle(

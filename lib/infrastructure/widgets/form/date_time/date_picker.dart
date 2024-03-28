@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
-import 'package:moneygement_app/infrastructure/widgets/form/date_time/utils/date_picker_util.dart';
 import 'package:sizer/sizer.dart';
+
+part 'utils/date_picker_util.dart';
 
 class MGDatePicker extends StatefulWidget {
   final bool enabled;
@@ -40,7 +41,7 @@ class MGDatePicker extends StatefulWidget {
     this.label,
     this.onFieldSubmitted,
     this.validator,
-    this.isFilled = false,
+    this.isFilled = true,
     this.labelStyle,
     this.style,
     this.hintStyle,
@@ -102,10 +103,11 @@ class MGnDatePickerState extends State<MGDatePicker> {
         }
       },
       onTap: () async {
+        print('Tap Date Field');
         final datePickerParams = DatePickerParams(
           initialDate: _selectedDate ?? DateTime.now(),
           firstDate: widget.firstDate ?? DateTime(1900),
-          lastDate: widget.lastDate ?? DateTime(2024),
+          lastDate: widget.lastDate ?? DateTime(3000),
           currentDate: widget.initialDate ?? DateTime.now(),
           initialDatePickerMode: widget.initialDatePickerMode,
           confirmText: widget.confirmText,

@@ -19,7 +19,7 @@ import 'package:moneygement_app/modules/home/presentation/screens/home/home_scre
     as _i2;
 import 'package:moneygement_app/modules/quizz/presentation/screens/quiz_screen.dart'
     as _i4;
-import 'package:moneygement_app/modules/transaction/presentation/income/create/create_income.dart'
+import 'package:moneygement_app/modules/transaction/presentation/screens/income/create/create_income.dart'
     as _i1;
 
 abstract class $AppRouter extends _i7.RootStackRouter {

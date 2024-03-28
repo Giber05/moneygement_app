@@ -37,7 +37,7 @@ class _RegisterUserForm extends StatelessWidget {
                 label: "Password",
               ),
               33.verticalSpace,
-              CBElevatedButton(
+              MGElevatedButton(
                 label: "Register",
                 fillParent: true,
                 onPressed: () {
