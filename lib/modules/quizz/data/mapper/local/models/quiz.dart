@@ -19,7 +19,7 @@ class Quiz extends QuizModel {
   final int grade;
   @HiveField(6)
   final List<QuizData> data;
-  Quiz({
+  const Quiz({
     required this.question,
     required this.questionNumber,
     required this.typeQuestion,

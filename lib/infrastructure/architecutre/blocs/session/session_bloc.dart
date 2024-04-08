@@ -21,7 +21,6 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   }
 
   void _logoutUser(LogoutEvent event, Emitter<SessionState> emit) async {
-    print("Logout");
     await _logout();
     emit(SessionLogout(event.user));
   }

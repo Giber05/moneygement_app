@@ -61,10 +61,10 @@ class InformationDialog extends StatelessWidget {
                   onTap: () {
                     final onConfirm = this.onConfirm;
                     if (onConfirm == null) {
-                      context.router.root.pop();
+                      context.router.root.maybePop();
                       return;
                     }
-                    onConfirm(() => context.router.pop());
+                    onConfirm(() => context.router.maybePop());
                   },
                   child: Column(
                     children: [

@@ -53,7 +53,6 @@ class QuizLocalDtsImpl implements QuizLocalDts {
                     ))
                 .toList()))
         .toList();
-    print('Result: $result');
     return result;
   }
 }

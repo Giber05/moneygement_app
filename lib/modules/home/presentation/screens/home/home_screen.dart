@@ -18,9 +18,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HomeScreenContent extends StatelessWidget {
-  const _HomeScreenContent({
-    super.key,
-  });
+  const _HomeScreenContent();
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +46,8 @@ class _HomeScreenContent extends StatelessWidget {
                   ),
 
                   SalomonBottomBarItem(
-                    icon: Icon(Icons.person),
-                    title: Text("Profile"),
+                    icon: const Icon(Icons.person),
+                    title: const Text("Profile"),
                     selectedColor: Colors.teal,
                   ),
                 ],
@@ -58,11 +56,11 @@ class _HomeScreenContent extends StatelessWidget {
         body: ValueListenableBuilder(
             valueListenable: currentBotNavIndex,
             builder: (context, currentIndex, _) => [
-                  OverviewScreen(),
-                  Center(
+                  const OverviewScreen(),
+                  const Center(
                     child: Text('Budget'),
                   ),
-                  Center(
+                  const Center(
                     child: Text('Profile'),
                   ),
                 ][currentIndex]));

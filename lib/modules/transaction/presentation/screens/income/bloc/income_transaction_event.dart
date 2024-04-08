@@ -12,5 +12,15 @@ class GetCategoriesEvent extends IncomeTransactionEvent {
   final String type;
 
   const GetCategoriesEvent({required this.userId, required this.type});
+}
 
+class CreateTransactionEvent extends IncomeTransactionEvent {
+  final List<CategoryModel> categories;
+  final String type;
+  final String userId;
+  const CreateTransactionEvent({
+    required this.type,
+    required this.categories,
+    required this.userId,
+  });
 }

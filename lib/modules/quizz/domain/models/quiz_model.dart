@@ -10,7 +10,7 @@ class QuizModel extends Equatable {
   final int grade;
   final List<QuizDataModel> data;
 
-  QuizModel({
+  const QuizModel({
     required this.question,
     required this.questionNumber,
     required this.typeQuestion,

@@ -17,7 +17,7 @@ class MGDatePicker extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? label;
-  final FormFieldSetter<DateTime>? onFieldSubmitted;
+  final FormFieldSetter<DateTime>? onChanged;
   final FormFieldValidator<String>? validator;
   final bool isFilled;
   final TextStyle? labelStyle;
@@ -39,7 +39,7 @@ class MGDatePicker extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.label,
-    this.onFieldSubmitted,
+    this.onChanged,
     this.validator,
     this.isFilled = true,
     this.labelStyle,
@@ -57,7 +57,6 @@ class MGnDatePickerState extends State<MGDatePicker> {
   DateTime? _selectedDate;
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
   final TextEditingController _textEditingController = TextEditingController();
-
   final FocusNode _focusNode = FocusNode();
   bool _isFocus = false;
   bool _isError = false;
@@ -78,14 +77,20 @@ class MGnDatePickerState extends State<MGDatePicker> {
     });
     final initialValue = widget.initialDate;
     if (initialValue != null) {
-      _textEditingController.value = TextEditingValue(text: _dateFormat.format(initialValue));
+      _textEditingController.value =
+          TextEditingValue(text: _dateFormat.format(initialValue));
     }
     _selectedDate = initialValue;
+
+    _textEditingController.addListener(() {
+      widget.onChanged?.call(_selectedDate);
+    });
   }
 
   @override
   void dispose() {
     _textEditingController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -95,15 +100,7 @@ class MGnDatePickerState extends State<MGDatePicker> {
       focusNode: _focusNode,
       enabled: widget.enabled,
       controller: _textEditingController,
-      onFieldSubmitted: (newValue) {
-        if (_selectedDate != null) {
-          widget.onFieldSubmitted?.call(_selectedDate);
-        } else {
-          widget.onFieldSubmitted?.call(null);
-        }
-      },
       onTap: () async {
-        print('Tap Date Field');
         final datePickerParams = DatePickerParams(
           initialDate: _selectedDate ?? DateTime.now(),
           firstDate: widget.firstDate ?? DateTime(1900),
@@ -117,8 +114,9 @@ class MGnDatePickerState extends State<MGDatePicker> {
         if (pickedDate != null && pickedDate != _selectedDate) {
           setState(() {
             _selectedDate = pickedDate;
+            _textEditingController.value =
+                TextEditingValue(text: _dateFormat.format(pickedDate));
           });
-          _textEditingController.text = _dateFormat.format(pickedDate);
         }
       },
       readOnly: true,
@@ -129,7 +127,8 @@ class MGnDatePickerState extends State<MGDatePicker> {
         });
         return error;
       },
-      style: widget.style ?? context.text.bodyLarge?.copyWith(fontWeight: FontWeight.normal),
+      style: widget.style ??
+          context.text.bodyLarge?.copyWith(fontWeight: FontWeight.normal),
       textAlignVertical: TextAlignVertical.bottom,
       decoration: InputDecoration(
         suffixIcon: widget.suffixIcon,
@@ -138,10 +137,13 @@ class MGnDatePickerState extends State<MGDatePicker> {
         suffixIconColor: context.color.outline,
         labelStyle: context.text.bodySmall,
         filled: true,
-        fillColor: widget.enabled ? getFillColor(context) : context.color.surfaceTint,
+        fillColor:
+            widget.enabled ? getFillColor(context) : context.color.surfaceTint,
         isDense: true,
-        contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
-        errorStyle: context.text.bodySmall?.copyWith(color: context.color.error, fontSize: 10.sp),
+        contentPadding: widget.contentPadding ??
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+        errorStyle: context.text.bodySmall
+            ?.copyWith(color: context.color.error, fontSize: 10.sp),
         enabledBorder: OutlineInputBorder(
             borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
             borderSide: BorderSide(color: context.color.surfaceTint)),

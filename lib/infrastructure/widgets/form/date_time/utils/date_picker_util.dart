@@ -39,7 +39,6 @@ class DatePickerParams {
 }
 
 Future<DateTime?> pickDate(BuildContext context, DatePickerParams params) async {
-  print('Call picked date');
   return await showDatePicker(
     currentDate: params.currentDate,
     context: context,

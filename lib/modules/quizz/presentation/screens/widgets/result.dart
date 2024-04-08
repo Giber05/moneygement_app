@@ -5,7 +5,7 @@ class _ResultQuiz extends StatelessWidget {
   final int totalQuestions;
   final VoidCallback resetQuiz;
 
-  _ResultQuiz({
+  const _ResultQuiz({
     required this.score,
     required this.totalQuestions,
     required this.resetQuiz,
@@ -19,12 +19,12 @@ class _ResultQuiz extends StatelessWidget {
         children: [
           Text(
             'Your score is $score/$totalQuestions',
-            style: TextStyle(fontSize: 24),
+            style: const TextStyle(fontSize: 24),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: resetQuiz,
-            child: Text('Restart Quiz'),
+            child: const Text('Restart Quiz'),
           ),
         ],
       ),

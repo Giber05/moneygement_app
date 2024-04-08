@@ -31,8 +31,8 @@ class CBButtonContent extends StatelessWidget {
         if (prefixIcon != null) prefixIcon!,
         if (keepBalance && prefixIcon == null && suffixIcon != null)
           CBHideWidget(
-            child: suffixIcon!,
             visible: false,
+            child: suffixIcon!,
           ),
         Text(
           label,
@@ -42,8 +42,8 @@ class CBButtonContent extends StatelessWidget {
         if (suffixIcon != null) suffixIcon!,
         if (keepBalance && suffixIcon == null && prefixIcon != null)
           CBHideWidget(
-            child: prefixIcon!,
             visible: false,
+            child: prefixIcon!,
           )
       ],
     );

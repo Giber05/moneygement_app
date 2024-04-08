@@ -49,7 +49,6 @@ class _QuestionItem extends StatelessWidget {
                   suffixIcon: const Icon(Icons.play_circle),
                   onPressed: () async {
                     final url = item.split('?')[0];
-                    print(url);
                     audioPlayer.play(UrlSource(url));
                   },
                 ),

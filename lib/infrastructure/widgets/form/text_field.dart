@@ -92,7 +92,7 @@ class MGTextField extends StatelessWidget {
             focusedErrorBorder:
                 OutlineInputBorder(borderRadius: borderRadius, borderSide: BorderSide(color: color.error)),
             focusedBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: BorderSide(color: color.primary)),
-            enabledBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: BorderSide(color: Colors.grey)),
+            enabledBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: const BorderSide(color: Colors.grey)),
             hintText: hintText,
             contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
           ),

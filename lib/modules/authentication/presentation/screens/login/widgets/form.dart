@@ -1,7 +1,7 @@
 part of '../login_screen.dart';
 
 class _LoginForm extends StatelessWidget {
-  const _LoginForm({super.key});
+  const _LoginForm();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _LoginForm extends StatelessWidget {
 }
 
 class _UFIcon extends StatelessWidget {
-  const _UFIcon({super.key});
+  const _UFIcon();
 
   @override
   Widget build(BuildContext context) {

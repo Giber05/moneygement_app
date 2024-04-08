@@ -1,7 +1,7 @@
 part of '../register_user_screen.dart';
 
 class _RegisterUserForm extends StatelessWidget {
-  const _RegisterUserForm({super.key});
+  const _RegisterUserForm();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _RegisterUserForm extends StatelessWidget {
 }
 
 class _UFIcon extends StatelessWidget {
-  const _UFIcon({super.key});
+  const _UFIcon();
 
   @override
   Widget build(BuildContext context) {

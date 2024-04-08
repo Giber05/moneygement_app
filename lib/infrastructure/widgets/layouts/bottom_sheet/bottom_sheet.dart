@@ -16,7 +16,6 @@ void openBottomSheet({required BuildContext context, List<BottomSheetAction> act
   final color = context.color;
   final text = context.text;
 
-  print('Open Bottom sheet');
   await showModalBottomSheet(
     context: context,
     

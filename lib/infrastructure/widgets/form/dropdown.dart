@@ -94,7 +94,6 @@ class _MGDropdownState<T> extends State<MGDropdown<T>> {
         DropdownMenuItem(
           value: _value,
           onTap: () {
-            print('ontap');
             hasAddNewItemUtil.onTap.call();
           },
           enabled: true,

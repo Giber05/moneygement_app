@@ -5,7 +5,7 @@ class QuizDataModel extends Equatable {
   final String? name;
   final String? value;
 
-  QuizDataModel({
+  const QuizDataModel({
     this.text,
     this.name,
     this.value,

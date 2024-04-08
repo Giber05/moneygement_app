@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'income_transaction_bloc.dart';
 
 sealed class IncomeTransactionState extends Equatable {
@@ -7,14 +8,33 @@ sealed class IncomeTransactionState extends Equatable {
   List<Object> get props => [];
 }
 
-final class IncomeTransactionInitial extends IncomeTransactionState {}
+class IncomeTransactionInitial extends IncomeTransactionState {}
 
-final class IncomeTransactionLoading extends IncomeTransactionState {}
+class IncomeTransactionLoading extends IncomeTransactionState {}
 
-final class IncomeTransactionLoaded extends IncomeTransactionState {
+class IncomeTransactionLoaded extends IncomeTransactionState {
   final List<CategoryModel> categories;
 
   const IncomeTransactionLoaded({required this.categories});
 }
 
-final class IncomeTransactionFailed extends IncomeTransactionState {}
+class IncomeTransactionFailed extends IncomeTransactionState {}
+
+class CreateTransactionLoading extends IncomeTransactionLoaded {
+  const CreateTransactionLoading({required super.categories});
+}
+
+class CreateTransactionSuccess extends IncomeTransactionLoaded {
+  final String message;
+
+  const CreateTransactionSuccess(
+      {required this.message, required super.categories});
+}
+
+class CreateTransactionFailed extends IncomeTransactionLoaded {
+  final String message;
+  const CreateTransactionFailed({
+    required this.message,
+    required super.categories,
+  });
+}
