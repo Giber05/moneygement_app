@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 // Updated Primary Color

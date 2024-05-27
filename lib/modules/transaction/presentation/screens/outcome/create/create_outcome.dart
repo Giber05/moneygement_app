@@ -13,45 +13,45 @@ import 'package:moneygement_app/infrastructure/service_locator/service_locator.d
 import 'package:moneygement_app/infrastructure/widgets/buttons/elevated_button.dart';
 import 'package:moneygement_app/infrastructure/widgets/form/date_time/date_picker.dart';
 import 'package:moneygement_app/infrastructure/widgets/form/text_field.dart';
-import 'package:moneygement_app/infrastructure/widgets/layouts/dialog/dialog_container.dart';
 import 'package:moneygement_app/infrastructure/widgets/loading/circular.dart';
 import 'package:moneygement_app/infrastructure/widgets/loading/overlay.dart';
 import 'package:moneygement_app/modules/transaction/domain/models/category_model.dart';
-import 'package:moneygement_app/modules/transaction/presentation/screens/income/bloc/income_transaction_bloc.dart';
+import 'package:moneygement_app/modules/transaction/presentation/screens/outcome/create/bloc/outcome_transaction_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter_iconpicker/flutter_iconpicker.dart';
-part 'widgets/create_income_form.dart';
+
+part 'widgets/create_outcome_form.dart';
 
 @RoutePage()
-class CreateIncomeScreen extends StatelessWidget {
-  const CreateIncomeScreen({super.key});
+class CreateOutcomeScreen extends StatelessWidget {
+  const CreateOutcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<IncomeTransactionBloc>()
-        ..add(GetCategoriesEvent(userId: context.userSession.user.userId, type: 'INCOME')),
+      create: (context) => getIt<OutcomeTransactionBloc>()
+        ..add(GetOutcomeCategoriesEvent(
+            userId: context.userSession.user.userId, type: 'OUTCOME')),
       child: Scaffold(
         backgroundColor: context.color.background,
-        body: const _CreateTransactionBody(),
+        body: const _CreateOutcomeBody(),
       ),
     );
   }
 }
 
-class _CreateTransactionBody extends StatelessWidget {
-  const _CreateTransactionBody();
+class _CreateOutcomeBody extends StatelessWidget {
+  const _CreateOutcomeBody();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<IncomeTransactionBloc, IncomeTransactionState>(
+    print('build outcome form body');
+    return BlocConsumer<OutcomeTransactionBloc, OutcomeTransactionState>(
       listener: (context, state) {
         final messengerCubit = context.read<MessengerCubit>();
-        if (state is CreateIncomeSuccess) {
+        if (state is CreateOutcomeSuccess) {
           messengerCubit.showSuccessSnackbar(state.message);
-          context.router.maybePop();
         }
-        if (state is CreateIncomeSuccess) {
+        if (state is CreateOutcomeSuccess) {
           messengerCubit.showErrorSnackbar(state.message);
         }
       },
@@ -80,40 +80,42 @@ class _CreateTransactionBody extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Pemasukan Baru',
-                  style: context.text.titleLarge?.copyWith(color: context.color.background),
+                  'Pengeluaran Baru',
+                  style: context.text.titleLarge
+                      ?.copyWith(color: context.color.background),
                 ),
               ],
             ),
           ),
-          BlocBuilder<IncomeTransactionBloc, IncomeTransactionState>(
+          BlocBuilder<OutcomeTransactionBloc, OutcomeTransactionState>(
             builder: (context, state) {
-              if (state is IncomeTransactionLoading) {
+              if (state is OutcomeTransactionLoading) {
                 return const Center(
                   child: CBCircularLoading(),
                 );
               }
-              if (state is IncomeTransactionFailed) {
+              if (state is OutcomeTransactionFailed) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Failed to get data!',
-                      style: context.text.bodyLarge?.copyWith(color: context.color.error),
+                      style: context.text.bodyLarge
+                          ?.copyWith(color: context.color.error),
                     ),
                   ],
                 );
               }
-              if (state is IncomeTransactionLoaded) {
-                return _CreateIncomeForm(
+              if (state is OutcomeTransactionLoaded) {
+                return _CreateOutcomeForm(
                   categories: state.categories,
                 );
               }
               return const SizedBox();
             },
           ),
-          if (state is CreateIncomeLoading) const MGLoadingOverlay()
+          if (state is CreateOutcomeLoading) const MGLoadingOverlay()
         ],
       ),
     );

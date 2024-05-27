@@ -54,6 +54,7 @@ class _MonthPickerState extends State<MonthPicker> {
               final newDate = DateTime(selectedMonth.value!.year, selectedMonth.value!.month - 1);
 
               selectedMonth.value = newDate;
+              widget.onMonthChanged(newDate);
             },
             child: const Icon(Icons.arrow_back_ios),
           ),
@@ -83,7 +84,7 @@ class _MonthPickerState extends State<MonthPicker> {
                         style: context.text.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '11 Transaksi',
+                        widget.subTitle,
                         style: context.text.bodySmall?.copyWith(
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,
@@ -103,6 +104,7 @@ class _MonthPickerState extends State<MonthPicker> {
               final newDate = DateTime(selectedMonth.value!.year, selectedMonth.value!.month + 1);
 
               selectedMonth.value = newDate;
+              widget.onMonthChanged(newDate);
             },
             child: const Icon(Icons.arrow_forward_ios),
           ),

@@ -1,9 +1,7 @@
-// ignore_for_file: must_be_immutable
+part of '../create_outcome.dart';
 
-part of '../create_income.dart';
-
-class _CreateIncomeForm extends StatelessWidget {
-  const _CreateIncomeForm({
+class _CreateOutcomeForm extends StatelessWidget {
+  const _CreateOutcomeForm({
     required this.categories,
   });
   final List<CategoryModel> categories;
@@ -11,13 +9,14 @@ class _CreateIncomeForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('rebuild');
-    final bloc = context.read<IncomeTransactionBloc>();
+    final bloc = context.read<OutcomeTransactionBloc>();
     return Container(
       margin: EdgeInsets.only(top: 12.h),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Form(
           key: bloc.formKey,
-          child: ListView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -72,12 +71,7 @@ class _CreateIncomeForm extends StatelessWidget {
                               return Container(
                                 padding: const EdgeInsets.all(8),
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => CreateNewCategoryDialog(),
-                                    );
-                                  },
+                                  onTap: () {},
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -141,81 +135,15 @@ class _CreateIncomeForm extends StatelessWidget {
                 elevation: 2,
                 fillParent: true,
                 onPressed: () {
-                  bloc.add(CreateIncomeEvent(
+                  bloc.add(CreateOutcomeEvent(
                     categories: categories,
-                    type: 'INCOME',
+                    type: 'OUTCOME',
                     userId: context.userSession.user.userId,
                   ));
                 },
               ),
             ],
           )),
-    );
-  }
-}
-
-class CreateNewCategoryDialog extends StatefulWidget {
-  const CreateNewCategoryDialog({
-    super.key,
-  });
-
-  @override
-  State<CreateNewCategoryDialog> createState() => _CreateNewCategoryDialogState();
-}
-
-class _CreateNewCategoryDialogState extends State<CreateNewCategoryDialog> {
-  Icon? _icon;
-  @override
-  Widget build(BuildContext context) {
-    return DialogContainer(
-      maxHeightPercentage: .6,
-      child: Form(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Center(
-                child: Text('Buat Kategori Baru', style: context.text.titleLarge),
-              ),
-              16.verticalSpace,
-              MGTextField(
-                label: 'Nama Kategori',
-                validator: (value) => value == null ? 'Masukan nama kategori' : null,
-              ),
-              16.verticalSpace,
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(60), color: Colors.grey[300]),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: _icon ?? const SizedBox(),
-                    ),
-                  ),
-                  8.horizontalSpace,
-                  MGElevatedButton(
-                    fillParent: false,
-                    label: 'Pilih Icon',
-                    onPressed: () async {
-                      IconData? icon = await showIconPicker(context, iconPackModes: [
-                        IconPack.cupertino,
-                        IconPack.allMaterial,
-                      ]);
-
-                      _icon = Icon(
-                        icon,
-                      );
-                      setState(() {});
-
-                      debugPrint('Picked Icon:  $icon');
-                    },
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

@@ -41,9 +41,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_expandable_fab: ^2.0.0
+  flutter_iconpicker: ^3.4.4
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^8.1.0
   flutter_stepindicator: ^0.1.7
   get_it: ^7.6.7
   hive: ^2.2.3

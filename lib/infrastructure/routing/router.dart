@@ -12,5 +12,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: HomeRoute.page, path: '/home'),
         AutoRoute(page: QuizRoute.page, path: '/quiz'),
         AutoRoute(page: CreateIncomeRoute.page, path: '/create-income'),
+        AutoRoute(page: CreateOutcomeRoute.page, path: '/create-outcome'),
       ];
 }

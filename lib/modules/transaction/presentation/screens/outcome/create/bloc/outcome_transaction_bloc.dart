@@ -10,20 +10,21 @@ import 'package:moneygement_app/modules/transaction/domain/usecases/create_trans
 import 'package:moneygement_app/modules/transaction/domain/usecases/get_categories.dart';
 import 'package:moneygement_app/modules/transaction/presentation/screens/income/create/widgets/create_transaction_formdata.dart';
 
-part 'income_transaction_event.dart';
-part 'income_transaction_state.dart';
+part 'outcome_transaction_event.dart';
+part 'outcome_transaction_state.dart';
 
 @injectable
-class IncomeTransactionBloc
-    extends Bloc<IncomeTransactionEvent, IncomeTransactionState> {
+class OutcomeTransactionBloc
+    extends Bloc<OutcomeTransactionEvent, OutcomeTransactionState> {
   final GetCategories _getCategories;
   final CreateTransaction _createTransaction;
 
-  IncomeTransactionBloc(this._getCategories, this._createTransaction)
-      : super(IncomeTransactionInitial()) {
-    on<GetCategoriesEvent>(_onGetCategories);
-    on<CreateIncomeEvent>(_onCreateIncome);
-  }
+OutcomeTransactionBloc(this._getCategories, this._createTransaction)
+    : super(OutcomeTransactionInitial()) {
+  on<GetOutcomeCategoriesEvent>(_onGetCategories);
+  on<CreateOutcomeEvent>(_onCreateOutcome);
+}
+
 
   final formKey = GlobalKey<FormState>();
 
@@ -35,26 +36,27 @@ class IncomeTransactionBloc
   ValueNotifier<DateTime?> selectedTransactionDate =
       ValueNotifier<DateTime?>(null);
 
-  Future<void> _onGetCategories(
-      GetCategoriesEvent event, Emitter<IncomeTransactionState> emit) async {
-    emit(IncomeTransactionLoading());
+  Future<void> _onGetCategories(GetOutcomeCategoriesEvent event,
+      Emitter<OutcomeTransactionState> emit) async {
+    print('GET CATEGORIES IN OUTCOME');
+    emit(OutcomeTransactionLoading());
     final result = await _getCategories(
         GetCategoriesParams(userId: event.userId, type: event.type));
     switch (result) {
       case Success(data: List<CategoryModel> categories):
         categories
             .add(const CategoryModel(id: 0, name: '', type: '', userId: ''));
-        emit(IncomeTransactionLoaded(categories: categories));
+        emit(OutcomeTransactionLoaded(categories: categories));
       case Error():
-        emit(IncomeTransactionFailed());
+        emit(OutcomeTransactionFailed());
       default:
     }
   }
 
-  Future<void> _onCreateIncome(
-      CreateIncomeEvent event, Emitter<IncomeTransactionState> emit) async {
+  Future<void> _onCreateOutcome(
+      CreateOutcomeEvent event, Emitter<OutcomeTransactionState> emit) async {
     if (formKey.currentState!.validate()) {
-      emit(CreateIncomeLoading(categories: event.categories));
+      emit(CreateOutcomeLoading(categories: event.categories));
       final amount = amountFieldController.text.parseCurrencyToInt();
       final formRequest = CreateTransactionFormData(
         amount: amount,
@@ -71,11 +73,11 @@ class IncomeTransactionBloc
 
       switch (result) {
         case Success(data: Nothing _):
-          emit(CreateIncomeSuccess(
+          emit(CreateOutcomeSuccess(
               message: 'Berhasil membuat transaksi',
               categories: event.categories));
         case Error():
-          emit(CreateIncomeFailed(
+          emit(CreateOutcomeFailed(
               message: result.exception.message, categories: event.categories));
           break;
         default:

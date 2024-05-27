@@ -78,6 +78,7 @@ class CBMessengerListener extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
             backgroundColor: state.backgroundColor(context),
+            
           ));
         }
         context.read<MessengerCubit>().idle();

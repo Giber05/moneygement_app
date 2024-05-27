@@ -14,11 +14,11 @@ class GetCategoriesEvent extends IncomeTransactionEvent {
   const GetCategoriesEvent({required this.userId, required this.type});
 }
 
-class CreateTransactionEvent extends IncomeTransactionEvent {
+class CreateIncomeEvent extends IncomeTransactionEvent {
   final List<CategoryModel> categories;
   final String type;
   final String userId;
-  const CreateTransactionEvent({
+  const CreateIncomeEvent({
     required this.type,
     required this.categories,
     required this.userId,

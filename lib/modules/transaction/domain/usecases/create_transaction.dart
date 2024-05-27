@@ -1,4 +1,3 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:moneygement_app/infrastructure/architecutre/use_case.dart';
 import 'package:moneygement_app/infrastructure/types/nothing.dart';

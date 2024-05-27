@@ -22,16 +22,17 @@ import '../../modules/authentication/domain/repositories/authentication_repo.dar
     as _i24;
 import '../../modules/authentication/domain/usecases/get_current_session.dart'
     as _i29;
-import '../../modules/authentication/domain/usecases/login.dart' as _i32;
-import '../../modules/authentication/domain/usecases/logout.dart' as _i34;
+import '../../modules/authentication/domain/usecases/login.dart' as _i33;
+import '../../modules/authentication/domain/usecases/logout.dart' as _i35;
 import '../../modules/authentication/domain/usecases/register_user.dart'
-    as _i36;
-import '../../modules/authentication/presentation/screens/login/bloc/login_bloc.dart'
-    as _i33;
-import '../../modules/authentication/presentation/screens/register_user/bloc/register_user_bloc.dart'
-    as _i37;
-import '../../modules/authentication/presentation/screens/splash/cubit/splash_cubit.dart'
     as _i39;
+import '../../modules/authentication/presentation/screens/login/bloc/login_bloc.dart'
+    as _i34;
+import '../../modules/authentication/presentation/screens/register_user/bloc/register_user_bloc.dart'
+    as _i40;
+import '../../modules/authentication/presentation/screens/splash/cubit/splash_cubit.dart'
+    as _i42;
+import '../../modules/overview/presentation/bloc/overview_bloc.dart' as _i37;
 import '../../modules/quizz/data/datasource/local/quiz_local_dts.dart' as _i14;
 import '../../modules/quizz/data/datasource/remote/quiz_remote_dts.dart'
     as _i15;
@@ -40,7 +41,7 @@ import '../../modules/quizz/domain/repositories/quiz_repo.dart' as _i16;
 import '../../modules/quizz/domain/usecases/cached_quizzes.dart' as _i26;
 import '../../modules/quizz/domain/usecases/get_cached_quizzes.dart' as _i28;
 import '../../modules/quizz/domain/usecases/get_quiz_data.dart' as _i30;
-import '../../modules/quizz/presentation/bloc/quiz_bloc.dart' as _i35;
+import '../../modules/quizz/presentation/bloc/quiz_bloc.dart' as _i38;
 import '../../modules/transaction/data/datasource/remote/category_remote_dts.dart'
     as _i7;
 import '../../modules/transaction/data/datasource/remote/transaction_remote_dts.dart'
@@ -56,17 +57,20 @@ import '../../modules/transaction/domain/repositories/transaction_repositories.d
 import '../../modules/transaction/domain/usecases/create_transaction.dart'
     as _i27;
 import '../../modules/transaction/domain/usecases/get_categories.dart' as _i11;
+import '../../modules/transaction/domain/usecases/get_transaction.dart' as _i31;
 import '../../modules/transaction/presentation/screens/income/bloc/income_transaction_bloc.dart'
-    as _i31;
+    as _i32;
+import '../../modules/transaction/presentation/screens/outcome/create/bloc/outcome_transaction_bloc.dart'
+    as _i36;
 import '../architecutre/blocs/messenger/messenger_cubit.dart' as _i13;
-import '../architecutre/blocs/session/session_bloc.dart' as _i38;
+import '../architecutre/blocs/session/session_bloc.dart' as _i41;
 import '../http_client/api_client.dart' as _i3;
-import '../http_client/auth_client_impl.dart' as _i5;
-import '../http_client/cb_client_impl.dart' as _i4;
+import '../http_client/auth_client_impl.dart' as _i4;
+import '../http_client/cb_client_impl.dart' as _i5;
 import '../local_storage/hive/hive_local_storage.dart' as _i12;
 import '../local_storage/secure_storage/secure_storage.dart' as _i18;
 import '../supabase/supabase_config.dart' as _i19;
-import 'modules/core_module.dart' as _i40;
+import 'modules/core_module.dart' as _i43;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -81,12 +85,12 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final coreModules = _$CoreModules();
     gh.lazySingleton<_i3.APIClient>(
-      () => _i4.MGClient(),
-      instanceName: 'CBClient',
+      () => _i4.AuthClient(),
+      instanceName: 'AuthClient',
     );
     gh.lazySingleton<_i3.APIClient>(
-      () => _i5.AuthClient(),
-      instanceName: 'AuthClient',
+      () => _i5.MGClient(),
+      instanceName: 'CBClient',
     );
     gh.factory<_i6.AuthenticationRemoteDTS>(
         () => _i6.AuthenticationRemoteDTSImpl());
@@ -129,28 +133,38 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i29.GetCurrentSession>(
         () => _i29.GetCurrentSession(gh<_i24.AuthenticationRepo>()));
     gh.factory<_i30.GetQuizData>(() => _i30.GetQuizData(gh<_i16.QuizRepo>()));
-    gh.factory<_i31.IncomeTransactionBloc>(() => _i31.IncomeTransactionBloc(
+    gh.factory<_i31.GetTransactions>(
+        () => _i31.GetTransactions(gh<_i21.TransactionRepositories>()));
+    gh.factory<_i32.IncomeTransactionBloc>(() => _i32.IncomeTransactionBloc(
           gh<_i11.GetCategories>(),
           gh<_i27.CreateTransaction>(),
         ));
-    gh.factory<_i32.Login>(() => _i32.Login(gh<_i24.AuthenticationRepo>()));
-    gh.factory<_i33.LoginBloc>(() => _i33.LoginBloc(gh<_i32.Login>()));
-    gh.factory<_i34.Logout>(() => _i34.Logout(gh<_i24.AuthenticationRepo>()));
-    gh.factory<_i35.QuizBloc>(() => _i35.QuizBloc(
+    gh.factory<_i33.Login>(() => _i33.Login(gh<_i24.AuthenticationRepo>()));
+    gh.factory<_i34.LoginBloc>(() => _i34.LoginBloc(gh<_i33.Login>()));
+    gh.factory<_i35.Logout>(() => _i35.Logout(gh<_i24.AuthenticationRepo>()));
+    gh.factory<_i36.OutcomeTransactionBloc>(() => _i36.OutcomeTransactionBloc(
+          gh<_i11.GetCategories>(),
+          gh<_i27.CreateTransaction>(),
+        ));
+    gh.factory<_i37.OverviewBloc>(() => _i37.OverviewBloc(
+          gh<_i31.GetTransactions>(),
+          gh<_i13.MessengerCubit>(),
+        ));
+    gh.factory<_i38.QuizBloc>(() => _i38.QuizBloc(
           gh<_i30.GetQuizData>(),
           gh<_i28.GetCachedQuizzes>(),
           gh<_i26.CachedQuizzes>(),
         ));
-    gh.factory<_i36.RegisterUser>(
-        () => _i36.RegisterUser(gh<_i24.AuthenticationRepo>()));
-    gh.factory<_i37.RegisterUserBloc>(
-        () => _i37.RegisterUserBloc(gh<_i36.RegisterUser>()));
-    gh.lazySingleton<_i38.SessionBloc>(
-        () => _i38.SessionBloc(gh<_i34.Logout>()));
-    gh.factory<_i39.SplashCubit>(
-        () => _i39.SplashCubit(gh<_i29.GetCurrentSession>()));
+    gh.factory<_i39.RegisterUser>(
+        () => _i39.RegisterUser(gh<_i24.AuthenticationRepo>()));
+    gh.factory<_i40.RegisterUserBloc>(
+        () => _i40.RegisterUserBloc(gh<_i39.RegisterUser>()));
+    gh.lazySingleton<_i41.SessionBloc>(
+        () => _i41.SessionBloc(gh<_i35.Logout>()));
+    gh.factory<_i42.SplashCubit>(
+        () => _i42.SplashCubit(gh<_i29.GetCurrentSession>()));
     return this;
   }
 }
 
-class _$CoreModules extends _i40.CoreModules {}
+class _$CoreModules extends _i43.CoreModules {}

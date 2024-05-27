@@ -16,19 +16,22 @@ class MessengerCubit extends Cubit<MessengerState> {
   void showSuccessSnackbar(String message,
       {Duration duration = const Duration(seconds: 1)}) {
     showSnackbar(
-        message: message,
-        backgroundColor: (context) => Colors.green,
-        duration: duration,
-        textColor: (context) => Colors.white);
+      message: message,
+      backgroundColor: (context) => Colors.green,
+      duration: duration,
+      textColor: (context) => Colors.white,
+      
+    );
   }
 
   void showErrorSnackbar(String message,
       {Duration duration = const Duration(seconds: 1)}) {
     showSnackbar(
-        message: message,
-        backgroundColor: (context) => Colors.red,
-        duration: duration,
-        textColor: (context) => Colors.white);
+      message: message,
+      backgroundColor: (context) => Colors.red,
+      duration: duration,
+      textColor: (context) => Colors.white,
+    );
   }
 
   void showSnackbar(

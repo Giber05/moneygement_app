@@ -57,12 +57,8 @@ class _HomeScreenContent extends StatelessWidget {
             valueListenable: currentBotNavIndex,
             builder: (context, currentIndex, _) => [
                   const OverviewScreen(),
-                  const Center(
-                    child: Text('Budget'),
-                  ),
-                  const Center(
-                    child: Text('Profile'),
-                  ),
+                  const Center(),
+                  const Center(),
                 ][currentIndex]));
   }
 }

@@ -20,20 +20,19 @@ class IncomeTransactionLoaded extends IncomeTransactionState {
 
 class IncomeTransactionFailed extends IncomeTransactionState {}
 
-class CreateTransactionLoading extends IncomeTransactionLoaded {
-  const CreateTransactionLoading({required super.categories});
+class CreateIncomeLoading extends IncomeTransactionLoaded {
+  const CreateIncomeLoading({required super.categories});
 }
 
-class CreateTransactionSuccess extends IncomeTransactionLoaded {
+class CreateIncomeSuccess extends IncomeTransactionLoaded {
   final String message;
 
-  const CreateTransactionSuccess(
-      {required this.message, required super.categories});
+  const CreateIncomeSuccess({required this.message, required super.categories});
 }
 
-class CreateTransactionFailed extends IncomeTransactionLoaded {
+class CreateIncomeFailed extends IncomeTransactionLoaded {
   final String message;
-  const CreateTransactionFailed({
+  const CreateIncomeFailed({
     required this.message,
     required super.categories,
   });

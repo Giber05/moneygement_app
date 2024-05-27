@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:moneygement_app/infrastructure/supabase/supabase_config.dart';
 import 'package:moneygement_app/modules/quizz/data/mapper/local/models/quiz.dart';
@@ -20,9 +22,19 @@ void main() async {
   Hive.registerAdapter(QuizDataAdapter());
   await Hive.openBox('quizBox');
   ENV.setEnv(ENV.dev);
+  HttpOverrides.global = MyHttpOverrides();
   await getIt<SupabaseConfig>().setup();
   initializeDateFormatting();
   runApp(MoneyGementApp(
     appRouter: AppRouter(),
   ));
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }

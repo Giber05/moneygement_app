@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 extension NumExt on num {
   String currencyFormat({String symbol = "Rp. "}) {
-    final currencyFormater = NumberFormat.currency(symbol: symbol);
+    final currencyFormater = NumberFormat.currency(symbol: symbol, decimalDigits: 0);
     final value = currencyFormater.format(this);
     return value;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneygement_app/infrastructure/ext/ctx_ext.dart';
+import 'package:moneygement_app/infrastructure/gen/assets.gen.dart';
 import 'package:moneygement_app/infrastructure/widgets/loading/circular.dart';
 
 class MGLoadingOverlay extends StatelessWidget {
@@ -25,6 +26,7 @@ class MGLoadingOverlay extends StatelessWidget {
       height: double.infinity,
       color: Colors.black.withOpacity(0.5),
       alignment: Alignment.center,
+      Assets.images.getStarted
       child: CBCircularLoading(
         color: circularColor ?? context.color.primary,
         radius: radius ?? 24,
