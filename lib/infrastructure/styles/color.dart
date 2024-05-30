@@ -21,7 +21,8 @@ const _lightScheme = ColorScheme.light(
   brightness: Brightness.light,
   tertiary: Color(0xFFFDC094), // Lighter shade of Accent for Gradient
   onTertiary: Color(0xFFFFFFFF),
-  surfaceTint: Colors.grey,
+  outline: Color(0xFFEAEAEA),
+  surfaceTint: Color(0xFFC6C6C6)
 );
 
 final _palette = CorePalette.of(_primaryColor.value);

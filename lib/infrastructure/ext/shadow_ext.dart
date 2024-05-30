@@ -4,7 +4,7 @@ extension BoxShadowExtension on BoxShadow {
   // Named constructor for a light shadow
   static BoxShadow light({
     Color color = Colors.black12,
-    double blurRadius = 3,
+    double blurRadius = 1,
     Offset offset = Offset.zero,
     double spreadRadius = 0,
   }) {
@@ -19,7 +19,7 @@ extension BoxShadowExtension on BoxShadow {
   // Named constructor for a medium shadow
   static BoxShadow medium({
     Color color = Colors.black12,
-    double blurRadius = 6,
+    double blurRadius = 4,
     Offset offset = Offset.zero,
     double spreadRadius = 0,
   }) {
@@ -34,7 +34,7 @@ extension BoxShadowExtension on BoxShadow {
   // Named constructor for a heavy shadow
   static BoxShadow heavy({
     Color color = Colors.black12,
-    double blurRadius = 8,
+    double blurRadius = 6,
     Offset offset = Offset.zero,
     double spreadRadius = 0,
   }) {

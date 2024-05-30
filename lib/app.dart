@@ -28,14 +28,14 @@ class MoneyGementApp extends StatelessWidget {
       ],
       child: Sizer(builder: (context, _, __) {
         return MaterialApp.router(
-           localizationsDelegates:const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-         Locale('id', 'ID'), // Indonesia
-      ],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('id', 'ID'), // Indonesia
+          ],
           debugShowCheckedModeBanner: false,
           routerDelegate: appRouter.delegate(),
           locale: const Locale('id', 'ID'),
@@ -53,7 +53,7 @@ class MoneyGementApp extends StatelessWidget {
           routeInformationParser: appRouter.defaultRouteParser(),
           theme: ThemeData(
             useMaterial3: false,
-            textTheme: CBTextTheme.textTheme,
+            textTheme: MGTextTheme.textTheme,
             colorScheme: CBTheme.lightScheme,
           ),
         );
@@ -78,7 +78,6 @@ class CBMessengerListener extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
             backgroundColor: state.backgroundColor(context),
-            
           ));
         }
         context.read<MessengerCubit>().idle();

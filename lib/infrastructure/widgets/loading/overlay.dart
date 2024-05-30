@@ -26,7 +26,6 @@ class MGLoadingOverlay extends StatelessWidget {
       height: double.infinity,
       color: Colors.black.withOpacity(0.5),
       alignment: Alignment.center,
-      Assets.images.getStarted
       child: CBCircularLoading(
         color: circularColor ?? context.color.primary,
         radius: radius ?? 24,

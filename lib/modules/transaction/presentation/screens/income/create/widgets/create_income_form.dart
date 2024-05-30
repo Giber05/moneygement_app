@@ -73,10 +73,11 @@ class _CreateIncomeForm extends StatelessWidget {
                                 padding: const EdgeInsets.all(8),
                                 child: GestureDetector(
                                   onTap: () async {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (context) => CreateNewCategoryDialog(),
-                                    );
+                                    context.router.push(const CreateCategoryRoute());
+                                    // await showDialog(
+                                    //   context: context,
+                                    //   builder: (context) => CreateNewCategoryDialog(),
+                                    // );
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
